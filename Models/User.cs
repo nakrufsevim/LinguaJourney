@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
-namespace CourseNotesSharing.Models
+namespace LinguaJourney.Models
 {
     public class User : IdentityUser
     {

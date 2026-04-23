@@ -1,4 +1,4 @@
-namespace CourseNotesSharing.Models;
+namespace LinguaJourney.Models;
 
 public class ErrorViewModel
 {

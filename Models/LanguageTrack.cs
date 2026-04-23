@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CourseNotesSharing.Models
+namespace LinguaJourney.Models
 {
     public class LanguageTrack
     {

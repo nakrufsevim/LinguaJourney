@@ -1,12 +1,12 @@
 using System.Diagnostics;
-using CourseNotesSharing.Data;
-using CourseNotesSharing.Models;
-using CourseNotesSharing.ViewModels;
+using LinguaJourney.Data;
+using LinguaJourney.Models;
+using LinguaJourney.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourseNotesSharing.Controllers
+namespace LinguaJourney.Controllers
 {
     public class HomeController : Controller
     {

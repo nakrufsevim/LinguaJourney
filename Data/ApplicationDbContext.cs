@@ -1,8 +1,8 @@
-using CourseNotesSharing.Models;
+using LinguaJourney.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourseNotesSharing.Data
+namespace LinguaJourney.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User>
     {

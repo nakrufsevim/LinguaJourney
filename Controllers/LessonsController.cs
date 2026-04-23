@@ -1,13 +1,13 @@
 using System.Security.Claims;
-using CourseNotesSharing.Data;
-using CourseNotesSharing.Models;
-using CourseNotesSharing.ViewModels;
+using LinguaJourney.Data;
+using LinguaJourney.Models;
+using LinguaJourney.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-namespace CourseNotesSharing.Controllers
+namespace LinguaJourney.Controllers
 {
     [Authorize]
     public class LessonsController : Controller

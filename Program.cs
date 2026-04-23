@@ -1,5 +1,5 @@
-using CourseNotesSharing.Data;
-using CourseNotesSharing.Models;
+using LinguaJourney.Data;
+using LinguaJourney.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

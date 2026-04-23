@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CourseNotesSharing.ViewModels
+namespace LinguaJourney.ViewModels
 {
     public class LessonFormViewModel
     {

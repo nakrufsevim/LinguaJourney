@@ -50,5 +50,5 @@ http://127.0.0.1:5057
 
 ## Notes
 
-- The project folder name remains `CourseNotesSharing`, but the app itself has been reworked into `LinguaJourney`
-- The compiled assembly name is set to `LinguaJourney`
+- The project uses the `LinguaJourney` assembly and namespace
+- SQL Server Express is the default local database target in the current configuration
