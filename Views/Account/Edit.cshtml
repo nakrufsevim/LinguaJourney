@@ -1,0 +1,67 @@
+@model ProfileViewModel
+
+@{
+    Layout = "_LearningLayout";
+}
+
+<section class="page-panel">
+    <p class="eyebrow">Profile Settings</p>
+    <h2>Edit your learner profile</h2>
+</section>
+
+<section class="content-card">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data" class="form-grid">
+        <div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
+
+        <div class="field">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName" class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName" class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" />
+            <span asp-validation-for="UserName" class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="NativeLanguage"></label>
+            <input asp-for="NativeLanguage" />
+            <span asp-validation-for="NativeLanguage" class="field-error"></span>
+        </div>
+
+        <div class="field">
+            <label asp-for="LearningMotto"></label>
+            <input asp-for="LearningMotto" />
+            <span asp-validation-for="LearningMotto" class="field-error"></span>
+        </div>
+
+        <div class="field form-span-2">
+            <label asp-for="ProfilePictureFile"></label>
+            <input asp-for="ProfilePictureFile" />
+            <span asp-validation-for="ProfilePictureFile" class="field-error"></span>
+        </div>
+
+        <div class="form-span-2 button-row">
+            <button type="submit" class="primary-button">Save Changes</button>
+            <a asp-action="Profile" class="ghost-button">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,69 @@
+@model RegisterViewModel
+
+<section class="auth-shell">
+    <div class="auth-card auth-card--wide">
+        <p class="eyebrow">Create Account</p>
+        <h1>Start a deliberate language routine.</h1>
+        <p class="section-copy">@ViewBag.AuthLead</p>
+
+        <form asp-action="Register" method="post" class="form-grid">
+            <div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
+
+            <div class="field">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" />
+                <span asp-validation-for="FirstName" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" />
+                <span asp-validation-for="LastName" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" />
+                <span asp-validation-for="UserName" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="NativeLanguage"></label>
+                <input asp-for="NativeLanguage" />
+                <span asp-validation-for="NativeLanguage" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="LearningMotto"></label>
+                <input asp-for="LearningMotto" placeholder="Example: Small daily practice beats rare long sessions." />
+                <span asp-validation-for="LearningMotto" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" />
+                <span asp-validation-for="ConfirmPassword" class="field-error"></span>
+            </div>
+
+            <div class="form-span-2">
+                <button type="submit" class="primary-button">Create Account</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

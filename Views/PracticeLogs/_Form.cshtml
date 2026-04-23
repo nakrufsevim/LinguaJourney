@@ -1,0 +1,61 @@
+@model PracticeLogFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
+
+<div class="field">
+    <label asp-for="LessonId"></label>
+    <select asp-for="LessonId" asp-items="ViewBag.LessonOptions">
+        <option value="">Select a lesson</option>
+    </select>
+    <span asp-validation-for="LessonId" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="SessionTitle"></label>
+    <input asp-for="SessionTitle" />
+    <span asp-validation-for="SessionTitle" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="ActivityType"></label>
+    <select asp-for="ActivityType" asp-items="ViewBag.ActivityOptions">
+        <option value="">Select an activity</option>
+    </select>
+    <span asp-validation-for="ActivityType" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="NewExpression"></label>
+    <input asp-for="NewExpression" />
+    <span asp-validation-for="NewExpression" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="AccuracyScore"></label>
+    <input asp-for="AccuracyScore" />
+    <span asp-validation-for="AccuracyScore" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="DurationMinutes"></label>
+    <input asp-for="DurationMinutes" />
+    <span asp-validation-for="DurationMinutes" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="PracticedOn"></label>
+    <input asp-for="PracticedOn" />
+    <span asp-validation-for="PracticedOn" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="NextReviewDate"></label>
+    <input asp-for="NextReviewDate" />
+    <span asp-validation-for="NextReviewDate" class="field-error"></span>
+</div>
+
+<div class="field form-span-2">
+    <label asp-for="Reflection"></label>
+    <textarea asp-for="Reflection" rows="4"></textarea>
+    <span asp-validation-for="Reflection" class="field-error"></span>
+</div>

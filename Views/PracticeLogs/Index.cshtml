@@ -1,0 +1,39 @@
+@model IEnumerable<PracticeLogListItemViewModel>
+
+<section class="page-panel">
+    <p class="eyebrow">Practice Logs</p>
+    <h2>Review what you practiced and what to revisit next.</h2>
+    <p class="section-copy">@ViewData["SectionText"]</p>
+
+    <div class="toolbar">
+        <form asp-action="Index" method="get" class="filter-row">
+            <select name="activityType" asp-items="ViewBag.ActivityOptions">
+                <option value="">All activity types</option>
+            </select>
+            <button type="submit" class="ghost-button">Apply</button>
+        </form>
+        <a asp-action="Create" class="primary-button">Log Practice Session</a>
+    </div>
+</section>
+
+@if (Model.Any())
+{
+    <section class="table-like">
+        @foreach (var log in Model)
+        {
+            <a asp-action="Details" asp-route-id="@log.Id" class="table-like__row">
+                <span>@log.SessionTitle</span>
+                <span>@log.ActivityType</span>
+                <span>@log.TrackName</span>
+                <span>@log.PracticedOn.ToString("dd MMM yyyy")</span>
+                <strong>@log.AccuracyScore% · @log.DurationMinutes min</strong>
+            </a>
+        }
+    </section>
+}
+else
+{
+    <section class="content-card compact-card">
+        <p class="empty-copy">No practice sessions logged yet. Record one after your next study block.</p>
+    </section>
+}

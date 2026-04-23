@@ -1,0 +1,61 @@
+@model LanguageTrackDetailsViewModel
+
+<section class="page-panel">
+    <p class="eyebrow">@Model.CurrentLevel -> @Model.GoalLevel</p>
+    <h2>@Model.Name</h2>
+    <p class="section-copy">@Model.Description</p>
+    <div class="mini-stats">
+        <span>Native language: @Model.NativeLanguage</span>
+        <span>Focus area: @Model.FocusArea</span>
+        <span>Weekly goal: @Model.WeeklyStudyGoalHours hour(s)</span>
+        <span>Milestone in @ViewBag.DaysRemaining day(s)</span>
+    </div>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <span>Lessons</span>
+        <strong>@Model.LessonCount</strong>
+    </article>
+    <article class="stat-card">
+        <span>Practice Logs</span>
+        <strong>@Model.PracticeLogCount</strong>
+    </article>
+    <article class="stat-card">
+        <span>Created</span>
+        <strong>@Model.CreatedDate.ToString("dd MMM yyyy")</strong>
+    </article>
+</section>
+
+<section class="content-card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">Attached Lessons</p>
+            <h3>Study units inside this track</h3>
+        </div>
+        <div class="button-row">
+            <a asp-controller="Lessons" asp-action="Create" asp-route-languageTrackId="@Model.Id" class="primary-button">Create Lesson</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="ghost-button">Edit Track</a>
+        </div>
+    </div>
+
+    @if (Model.Lessons.Any())
+    {
+        <div class="table-like">
+            @foreach (var lesson in Model.Lessons)
+            {
+                <a asp-controller="Lessons" asp-action="Details" asp-route-id="@lesson.Id" class="table-like__row">
+                    <span>@lesson.Title</span>
+                    <span>@lesson.SkillArea</span>
+                    <span>@lesson.CefrLevel</span>
+                    <span>@lesson.PracticeLogCount log(s)</span>
+                    <strong>@(lesson.IsCompleted ? "Completed" : "Planned")</strong>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="empty-copy">No lessons yet for this track.</p>
+    }
+</section>

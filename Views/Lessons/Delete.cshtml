@@ -1,0 +1,19 @@
+@model LessonDetailsViewModel
+
+<section class="content-card compact-card">
+    <p class="eyebrow">Delete Lesson</p>
+    <h2>@Model.Title</h2>
+    <p class="section-copy">This will remove the lesson and any practice logs attached to it.</p>
+
+    <div class="mini-stats">
+        <span>Track: @Model.TrackName</span>
+        <span>Skill: @Model.SkillArea</span>
+        <span>Scheduled: @Model.ScheduledDate.ToString("dd MMM yyyy")</span>
+    </div>
+
+    <form asp-action="Delete" method="post" class="button-row mt-4">
+        <input asp-for="Id" type="hidden" />
+        <button type="submit" class="ghost-button ghost-button--danger">Delete Permanently</button>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="primary-button">Cancel</a>
+    </form>
+</section>

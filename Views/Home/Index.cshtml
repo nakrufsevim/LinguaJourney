@@ -1,0 +1,161 @@
+@model HomeDashboardViewModel
+
+@{
+    if (Model.IsAuthenticated)
+    {
+        Layout = "_LearningLayout";
+    }
+}
+
+@if (!Model.IsAuthenticated)
+{
+    <section class="hero-card hero-card--single">
+        <div class="hero-copy">
+            <p class="eyebrow">@ViewData["HeroLabel"]</p>
+            <h1>Design a serious language-learning routine instead of collecting random exercises.</h1>
+            <p class="lead-text">@ViewBag.Highlight</p>
+
+            <div class="button-row">
+                <a asp-controller="Account" asp-action="Register" class="primary-button">Create an Account</a>
+                <a asp-controller="Account" asp-action="Login" class="ghost-button">Login</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="card-grid three-up">
+        <article class="content-card">
+            <p class="eyebrow">Language Tracks</p>
+            <h2>Map each target language to a clear milestone.</h2>
+            <p>Keep native language, current level, goal level, focus area, weekly study goal, and milestone date in one structured record.</p>
+        </article>
+        <article class="content-card">
+            <p class="eyebrow">Lessons</p>
+            <h2>Turn goals into scheduled learning units.</h2>
+            <p>Create lesson plans around grammar, vocabulary, speaking, listening, reading, or writing with one practical task attached.</p>
+        </article>
+        <article class="content-card">
+            <p class="eyebrow">Practice Logs</p>
+            <h2>Capture reflection, accuracy, and next review dates.</h2>
+            <p>Every practice session records what you learned, how long it took, and when you should revisit the material.</p>
+        </article>
+    </section>
+}
+else
+{
+    <section class="page-panel">
+        <p class="eyebrow">Welcome back</p>
+        <h2>@Model.FirstName, your study system is ready.</h2>
+        <p class="section-copy">Use the dashboard to see what needs attention, what is complete, and where your next review should happen.</p>
+    </section>
+
+    <section class="stats-grid">
+        <article class="stat-card">
+            <span>Language Tracks</span>
+            <strong>@Model.LanguageTrackCount</strong>
+        </article>
+        <article class="stat-card">
+            <span>Lessons</span>
+            <strong>@Model.LessonCount</strong>
+        </article>
+        <article class="stat-card">
+            <span>Practice Logs</span>
+            <strong>@Model.PracticeLogCount</strong>
+        </article>
+        <article class="stat-card">
+            <span>Completed Lessons</span>
+            <strong>@Model.CompletedLessonCount</strong>
+        </article>
+        <article class="stat-card">
+            <span>This Week</span>
+            <strong>@Model.WeeklyMinutes min</strong>
+        </article>
+    </section>
+
+    <section class="card-grid two-up">
+        <article class="content-card">
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">Priority Tracks</p>
+                    <h3>Your next language milestones</h3>
+                </div>
+                <a asp-controller="LanguageTracks" asp-action="Create" class="inline-link">Add Track</a>
+            </div>
+
+            @if (Model.PriorityTracks.Any())
+            {
+                <div class="stack-list">
+                    @foreach (var track in Model.PriorityTracks)
+                    {
+                        <a asp-controller="LanguageTracks" asp-action="Details" asp-route-id="@track.Id" class="stack-link">
+                            <strong>@track.Name</strong>
+                            <span>@track.FocusArea</span>
+                            <span>Goal: @track.GoalLevel · Lessons: @track.LessonCount</span>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="empty-copy">No tracks yet. Start with one target language and one milestone.</p>
+            }
+        </article>
+
+        <article class="content-card">
+            <div class="section-head">
+                <div>
+                    <p class="eyebrow">Upcoming Lessons</p>
+                    <h3>Your current study board</h3>
+                </div>
+                <a asp-controller="Lessons" asp-action="Create" class="inline-link">Add Lesson</a>
+            </div>
+
+            @if (Model.UpcomingLessons.Any())
+            {
+                <div class="stack-list">
+                    @foreach (var lesson in Model.UpcomingLessons)
+                    {
+                        <a asp-controller="Lessons" asp-action="Details" asp-route-id="@lesson.Id" class="stack-link">
+                            <strong>@lesson.Title</strong>
+                            <span>@lesson.TrackName · @lesson.SkillArea</span>
+                            <span>@lesson.ScheduledDate.ToString("dd MMM yyyy") · @(lesson.IsCompleted ? "Completed" : "Planned")</span>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="empty-copy">Your lesson board is empty. Create a lesson for your next study session.</p>
+            }
+        </article>
+    </section>
+
+    <section class="content-card">
+        <div class="section-head">
+            <div>
+                <p class="eyebrow">Recent Practice</p>
+                <h3>Latest review sessions</h3>
+            </div>
+            <a asp-controller="PracticeLogs" asp-action="Create" class="inline-link">Log Session</a>
+        </div>
+
+        @if (Model.RecentPracticeLogs.Any())
+        {
+            <div class="table-like">
+                @foreach (var log in Model.RecentPracticeLogs)
+                {
+                    <a asp-controller="PracticeLogs" asp-action="Details" asp-route-id="@log.Id" class="table-like__row">
+                        <span>@log.SessionTitle</span>
+                        <span>@log.ActivityType</span>
+                        <span>@log.LessonTitle</span>
+                        <span>@log.PracticedOn.ToString("dd MMM")</span>
+                        <strong>@log.AccuracyScore%</strong>
+                    </a>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="empty-copy">No practice logs yet. Record your next speaking drill, reading sprint, or listening review.</p>
+        }
+    </section>
+}

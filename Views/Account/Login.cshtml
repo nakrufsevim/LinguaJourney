@@ -1,0 +1,36 @@
+@model LoginViewModel
+
+<section class="auth-shell">
+    <div class="auth-card">
+        <p class="eyebrow">Login</p>
+        <h1>Open your study workspace.</h1>
+        <p class="section-copy">@ViewBag.AuthLead</p>
+
+        <form asp-action="Login" method="post" class="form-stack">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="field">
+                <label asp-for="UserName"></label>
+                <input asp-for="UserName" />
+                <span asp-validation-for="UserName" class="field-error"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password" class="field-error"></span>
+            </div>
+
+            <label class="checkbox-row">
+                <input asp-for="RememberMe" />
+                <span>Remember me</span>
+            </label>
+
+            <button type="submit" class="primary-button w-100">Login</button>
+        </form>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

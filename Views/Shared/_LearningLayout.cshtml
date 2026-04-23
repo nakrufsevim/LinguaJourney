@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LinguaJourney Workspace</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="workspace-body">
+    <div class="workspace-shell">
+        <aside class="workspace-sidebar">
+            <a asp-controller="Home" asp-action="Index" class="brand-mark brand-mark--sidebar">
+                <span class="brand-mark__pulse"></span>
+                <span>LinguaJourney</span>
+            </a>
+
+            <p class="workspace-copy">A focused study workspace for building fluency with intention.</p>
+
+            <nav class="workspace-nav">
+                <a asp-controller="Home" asp-action="Index">Dashboard</a>
+                <a asp-controller="LanguageTracks" asp-action="Index">Language Tracks</a>
+                <a asp-controller="LanguageTracks" asp-action="MyTracks">My Focus Tracks</a>
+                <a asp-controller="Lessons" asp-action="Index">Lessons</a>
+                <a asp-controller="Lessons" asp-action="MyLessons">Weekly Study Board</a>
+                <a asp-controller="PracticeLogs" asp-action="Index">Practice Logs</a>
+                <a asp-controller="Home" asp-action="Search">Search</a>
+                <a asp-controller="Account" asp-action="Profile">Profile</a>
+            </nav>
+        </aside>
+
+        <div class="workspace-content">
+            <header class="workspace-topbar">
+                <div>
+                    <p class="eyebrow">Learning workspace</p>
+                    <h1>@ViewData["Title"]</h1>
+                </div>
+
+                <div class="workspace-user">
+                    <span>@User.Identity?.Name</span>
+                    <form asp-controller="Account" asp-action="Logout" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="ghost-button">Logout</button>
+                    </form>
+                </div>
+            </header>
+
+            <main class="workspace-main">
+                @if (TempData["StatusMessage"] is string statusMessage)
+                {
+                    <div class="flash-message">@statusMessage</div>
+                }
+
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

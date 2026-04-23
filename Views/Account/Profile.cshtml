@@ -1,0 +1,55 @@
+@model ProfileViewModel
+
+@{
+    Layout = "_LearningLayout";
+}
+
+<section class="page-panel">
+    <p class="eyebrow">Profile</p>
+    <h2>@Model.FirstName @Model.LastName</h2>
+    <p class="section-copy">@(!string.IsNullOrWhiteSpace(Model.LearningMotto) ? Model.LearningMotto : "Add a learning motto to guide your routine.")</p>
+</section>
+
+<section class="stats-grid">
+    <article class="stat-card">
+        <span>Native Language</span>
+        <strong>@Model.NativeLanguage</strong>
+    </article>
+    <article class="stat-card">
+        <span>Tracks</span>
+        <strong>@Model.LanguageTrackCount</strong>
+    </article>
+    <article class="stat-card">
+        <span>Lessons</span>
+        <strong>@Model.LessonCount</strong>
+    </article>
+    <article class="stat-card">
+        <span>Practice Logs</span>
+        <strong>@Model.PracticeLogCount</strong>
+    </article>
+    <article class="stat-card">
+        <span>Last Practice</span>
+        <strong>@(Model.LastPracticeDate?.ToString("dd MMM yyyy") ?? "None")</strong>
+    </article>
+</section>
+
+<section class="card-grid two-up">
+    <article class="content-card">
+        <h3>Account Details</h3>
+        <dl class="detail-list">
+            <div><dt>Username</dt><dd>@Model.UserName</dd></div>
+            <div><dt>Email</dt><dd>@Model.Email</dd></div>
+            <div><dt>Joined</dt><dd>@Model.JoinDate.ToString("dd MMM yyyy")</dd></div>
+        </dl>
+    </article>
+
+    <article class="content-card">
+        <h3>Actions</h3>
+        <div class="button-stack">
+            <a asp-action="Edit" class="primary-button">Edit Profile</a>
+            <a asp-action="ChangePassword" class="ghost-button">Change Password</a>
+            <a asp-controller="LanguageTracks" asp-action="Create" class="ghost-button">Create Language Track</a>
+            <a asp-controller="PracticeLogs" asp-action="Create" class="ghost-button">Log Practice Session</a>
+        </div>
+    </article>
+</section>

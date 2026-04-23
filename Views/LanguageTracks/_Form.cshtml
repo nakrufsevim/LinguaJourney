@@ -1,0 +1,51 @@
+@model LanguageTrackFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
+
+<div class="field">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" placeholder="Example: Spanish" />
+    <span asp-validation-for="Name" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="NativeLanguage"></label>
+    <input asp-for="NativeLanguage" />
+    <span asp-validation-for="NativeLanguage" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="CurrentLevel"></label>
+    <select asp-for="CurrentLevel" asp-items="ViewBag.LevelOptions"></select>
+    <span asp-validation-for="CurrentLevel" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="GoalLevel"></label>
+    <select asp-for="GoalLevel" asp-items="ViewBag.GoalLevelOptions"></select>
+    <span asp-validation-for="GoalLevel" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="FocusArea"></label>
+    <select asp-for="FocusArea" asp-items="ViewBag.FocusAreaOptions"></select>
+    <span asp-validation-for="FocusArea" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="WeeklyStudyGoalHours"></label>
+    <input asp-for="WeeklyStudyGoalHours" />
+    <span asp-validation-for="WeeklyStudyGoalHours" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="MilestoneDate"></label>
+    <input asp-for="MilestoneDate" />
+    <span asp-validation-for="MilestoneDate" class="field-error"></span>
+</div>
+
+<div class="field form-span-2">
+    <label asp-for="Description"></label>
+    <textarea asp-for="Description" rows="4" placeholder="Describe why this language matters, what skill gap you are fixing, and what success looks like."></textarea>
+    <span asp-validation-for="Description" class="field-error"></span>
+</div>

@@ -1,0 +1,69 @@
+@model LessonFormViewModel
+
+<div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
+
+<div class="field">
+    <label asp-for="LanguageTrackId"></label>
+    <select asp-for="LanguageTrackId" asp-items="ViewBag.TrackOptions">
+        <option value="">Select a track</option>
+    </select>
+    <span asp-validation-for="LanguageTrackId" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="Title"></label>
+    <input asp-for="Title" />
+    <span asp-validation-for="Title" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="SkillArea"></label>
+    <select asp-for="SkillArea" asp-items="ViewBag.SkillOptions">
+        <option value="">Select a skill</option>
+    </select>
+    <span asp-validation-for="SkillArea" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="CefrLevel"></label>
+    <select asp-for="CefrLevel" asp-items="ViewBag.CefrOptions">
+        <option value="">Select a level</option>
+    </select>
+    <span asp-validation-for="CefrLevel" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="VocabularyTheme"></label>
+    <input asp-for="VocabularyTheme" />
+    <span asp-validation-for="VocabularyTheme" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="EstimatedMinutes"></label>
+    <input asp-for="EstimatedMinutes" />
+    <span asp-validation-for="EstimatedMinutes" class="field-error"></span>
+</div>
+
+<div class="field">
+    <label asp-for="ScheduledDate"></label>
+    <input asp-for="ScheduledDate" />
+    <span asp-validation-for="ScheduledDate" class="field-error"></span>
+</div>
+
+<div class="field checkbox-field">
+    <label asp-for="IsCompleted"></label>
+    <input asp-for="IsCompleted" />
+    <span asp-validation-for="IsCompleted" class="field-error"></span>
+</div>
+
+<div class="field form-span-2">
+    <label asp-for="Summary"></label>
+    <textarea asp-for="Summary" rows="3"></textarea>
+    <span asp-validation-for="Summary" class="field-error"></span>
+</div>
+
+<div class="field form-span-2">
+    <label asp-for="PracticeTask"></label>
+    <textarea asp-for="PracticeTask" rows="3"></textarea>
+    <span asp-validation-for="PracticeTask" class="field-error"></span>
+</div>

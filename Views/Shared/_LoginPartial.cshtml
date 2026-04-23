@@ -1,0 +1,13 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <a asp-controller="Home" asp-action="Index" class="ghost-link">Dashboard</a>
+    <a asp-controller="Account" asp-action="Profile" class="solid-link">@User.Identity?.Name</a>
+}
+else
+{
+    <a asp-controller="Account" asp-action="Login" class="ghost-link">Login</a>
+    <a asp-controller="Account" asp-action="Register" class="solid-link">Register</a>
+}

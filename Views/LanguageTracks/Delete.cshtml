@@ -1,0 +1,19 @@
+@model LanguageTrackDetailsViewModel
+
+<section class="content-card compact-card">
+    <p class="eyebrow">Delete Track</p>
+    <h2>@Model.Name</h2>
+    <p class="section-copy">Deleting this track will also remove its lessons and practice logs.</p>
+
+    <div class="mini-stats">
+        <span>Focus: @Model.FocusArea</span>
+        <span>Lessons: @Model.LessonCount</span>
+        <span>Practice Logs: @Model.PracticeLogCount</span>
+    </div>
+
+    <form asp-action="Delete" method="post" class="button-row mt-4">
+        <input asp-for="Id" type="hidden" />
+        <button type="submit" class="ghost-button ghost-button--danger">Delete Permanently</button>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="primary-button">Cancel</a>
+    </form>
+</section>

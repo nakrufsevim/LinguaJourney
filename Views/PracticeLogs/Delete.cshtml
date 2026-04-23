@@ -1,0 +1,19 @@
+@model PracticeLogDetailsViewModel
+
+<section class="content-card compact-card">
+    <p class="eyebrow">Delete Practice Log</p>
+    <h2>@Model.SessionTitle</h2>
+    <p class="section-copy">This removes the reflection, score, and next review date for the session.</p>
+
+    <div class="mini-stats">
+        <span>Lesson: @Model.LessonTitle</span>
+        <span>Activity: @Model.ActivityType</span>
+        <span>Accuracy: @Model.AccuracyScore%</span>
+    </div>
+
+    <form asp-action="Delete" method="post" class="button-row mt-4">
+        <input asp-for="Id" type="hidden" />
+        <button type="submit" class="ghost-button ghost-button--danger">Delete Permanently</button>
+        <a asp-action="Details" asp-route-id="@Model.Id" class="primary-button">Cancel</a>
+    </form>
+</section>

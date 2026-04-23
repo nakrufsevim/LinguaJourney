@@ -1,0 +1,29 @@
+@model IEnumerable<LessonListItemViewModel>
+
+<section class="page-panel">
+    <p class="eyebrow">Weekly Study Board</p>
+    <h2>Upcoming lessons waiting for action</h2>
+    <p class="section-copy">@ViewData["SectionText"]</p>
+</section>
+
+@if (Model.Any())
+{
+    <section class="table-like">
+        @foreach (var lesson in Model)
+        {
+            <a asp-action="Details" asp-route-id="@lesson.Id" class="table-like__row">
+                <span>@lesson.Title</span>
+                <span>@lesson.TrackName</span>
+                <span>@lesson.SkillArea</span>
+                <span>@lesson.ScheduledDate.ToString("dd MMM yyyy")</span>
+                <strong>@lesson.EstimatedMinutes min</strong>
+            </a>
+        }
+    </section>
+}
+else
+{
+    <section class="content-card compact-card">
+        <p class="empty-copy">No active lessons remain. Add a new lesson or mark existing ones as incomplete if you want to revisit them.</p>
+    </section>
+}

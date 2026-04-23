@@ -1,0 +1,60 @@
+@model IEnumerable<LessonListItemViewModel>
+
+<section class="page-panel">
+    <p class="eyebrow">Lessons</p>
+    <h2>Plan focused study sessions</h2>
+    <p class="section-copy">@ViewData["SectionText"]</p>
+
+    <div class="toolbar">
+        <form asp-action="Index" method="get" class="filter-row">
+            <select name="languageTrackId" asp-items="ViewBag.TrackOptions">
+                <option value="">All tracks</option>
+            </select>
+            <select name="skillArea" asp-items="ViewBag.SkillOptions">
+                <option value="">All skills</option>
+            </select>
+            <button type="submit" class="ghost-button">Apply</button>
+        </form>
+        <div class="button-row">
+            <a asp-action="MyLessons" class="ghost-button">Weekly Study Board</a>
+            <a asp-action="Create" class="primary-button">Create Lesson</a>
+        </div>
+    </div>
+</section>
+
+@if (Model.Any())
+{
+    <section class="card-grid two-up">
+        @foreach (var lesson in Model)
+        {
+            <article class="content-card">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">@lesson.TrackName</p>
+                        <h3>@lesson.Title</h3>
+                    </div>
+                    <span class="pill">@lesson.SkillArea</span>
+                </div>
+
+                <p class="meta-text">@lesson.CefrLevel · @lesson.VocabularyTheme</p>
+                <div class="mini-stats">
+                    <span>Scheduled: @lesson.ScheduledDate.ToString("dd MMM yyyy")</span>
+                    <span>Duration: @lesson.EstimatedMinutes min</span>
+                    <span>Practice logs: @lesson.PracticeLogCount</span>
+                </div>
+
+                <div class="button-row">
+                    <a asp-action="Details" asp-route-id="@lesson.Id" class="primary-button">Details</a>
+                    <a asp-action="Edit" asp-route-id="@lesson.Id" class="ghost-button">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@lesson.Id" class="ghost-button ghost-button--danger">Delete</a>
+                </div>
+            </article>
+        }
+    </section>
+}
+else
+{
+    <section class="content-card compact-card">
+        <p class="empty-copy">No lessons yet. Create one lesson for your next study block.</p>
+    </section>
+}

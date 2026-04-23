@@ -1,0 +1,83 @@
+@model SearchResultViewModel
+
+@{
+    if (Model.IsAuthenticated)
+    {
+        Layout = "_LearningLayout";
+    }
+}
+
+<section class="page-panel">
+    <p class="eyebrow">Search</p>
+    <h2>Search your study library</h2>
+    <p class="section-copy">@ViewData["SearchTip"]</p>
+
+    <form asp-action="Search" method="get" class="search-form">
+        <input type="text" name="query" value="@Model.Query" placeholder="Try Spanish, pronunciation, shadowing, travel..." />
+        <button type="submit" class="primary-button">Search</button>
+    </form>
+
+    <p class="meta-text">@ViewBag.SearchMessage</p>
+</section>
+
+@if (Model.TotalResults == 0)
+{
+    <section class="content-card compact-card">
+        <p class="empty-copy">No results to show yet.</p>
+    </section>
+}
+else
+{
+    <section class="card-grid three-up">
+        <article class="content-card">
+            <div class="section-head">
+                <h3>Tracks</h3>
+                <span>@Model.Tracks.Count()</span>
+            </div>
+            <div class="stack-list">
+                @foreach (var item in Model.Tracks)
+                {
+                    <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id" class="stack-link">
+                        <strong>@item.Title</strong>
+                        <span>@item.Subtitle</span>
+                        <span>@item.Description</span>
+                    </a>
+                }
+            </div>
+        </article>
+
+        <article class="content-card">
+            <div class="section-head">
+                <h3>Lessons</h3>
+                <span>@Model.Lessons.Count()</span>
+            </div>
+            <div class="stack-list">
+                @foreach (var item in Model.Lessons)
+                {
+                    <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id" class="stack-link">
+                        <strong>@item.Title</strong>
+                        <span>@item.Subtitle</span>
+                        <span>@item.Description</span>
+                    </a>
+                }
+            </div>
+        </article>
+
+        <article class="content-card">
+            <div class="section-head">
+                <h3>Practice Logs</h3>
+                <span>@Model.PracticeLogs.Count()</span>
+            </div>
+            <div class="stack-list">
+                @foreach (var item in Model.PracticeLogs)
+                {
+                    <a asp-controller="@item.ControllerName" asp-action="Details" asp-route-id="@item.Id" class="stack-link">
+                        <strong>@item.Title</strong>
+                        <span>@item.Subtitle</span>
+                        <span>@item.Description</span>
+                    </a>
+                }
+            </div>
+        </article>
+    </section>
+}

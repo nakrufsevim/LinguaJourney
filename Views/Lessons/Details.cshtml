@@ -1,0 +1,62 @@
+@model LessonDetailsViewModel
+
+<section class="page-panel">
+    <p class="eyebrow">@Model.TrackName</p>
+    <h2>@Model.Title</h2>
+    <p class="section-copy">@Model.Summary</p>
+    <div class="mini-stats">
+        <span>Skill: @Model.SkillArea</span>
+        <span>Level: @Model.CefrLevel</span>
+        <span>Theme: @Model.VocabularyTheme</span>
+        <span>Scheduled: @Model.ScheduledDate.ToString("dd MMM yyyy")</span>
+    </div>
+</section>
+
+<section class="card-grid two-up">
+    <article class="content-card">
+        <h3>Practice Task</h3>
+        <p>@Model.PracticeTask</p>
+        <div class="mini-stats">
+            <span>Estimated time: @Model.EstimatedMinutes min</span>
+            <span>Status: @(Model.IsCompleted ? "Completed" : "Planned")</span>
+        </div>
+    </article>
+
+    <article class="content-card">
+        <h3>Actions</h3>
+        <div class="button-stack">
+            <a asp-controller="PracticeLogs" asp-action="Create" asp-route-lessonId="@Model.Id" class="primary-button">Log Practice Session</a>
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="ghost-button">Edit Lesson</a>
+            <a asp-action="Delete" asp-route-id="@Model.Id" class="ghost-button ghost-button--danger">Delete Lesson</a>
+        </div>
+    </article>
+</section>
+
+<section class="content-card">
+    <div class="section-head">
+        <div>
+            <p class="eyebrow">Practice History</p>
+            <h3>Sessions linked to this lesson</h3>
+        </div>
+        <span>@ViewBag.PracticeCount log(s)</span>
+    </div>
+
+    @if (Model.PracticeLogs.Any())
+    {
+        <div class="table-like">
+            @foreach (var log in Model.PracticeLogs)
+            {
+                <a asp-controller="PracticeLogs" asp-action="Details" asp-route-id="@log.Id" class="table-like__row">
+                    <span>@log.SessionTitle</span>
+                    <span>@log.ActivityType</span>
+                    <span>@log.PracticedOn.ToString("dd MMM yyyy")</span>
+                    <strong>@log.AccuracyScore%</strong>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="empty-copy">No practice logs linked to this lesson yet.</p>
+    }
+</section>

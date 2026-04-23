@@ -1,0 +1,21 @@
+@model LanguageTrackFormViewModel
+
+<section class="page-panel">
+    <p class="eyebrow">Create</p>
+    <h2>Start a new language track</h2>
+</section>
+
+<section class="content-card">
+    <form asp-action="Create" method="post" class="form-grid">
+        <partial name="_Form" model="Model" />
+
+        <div class="form-span-2 button-row">
+            <button type="submit" class="primary-button">Create Track</button>
+            <a asp-action="Index" class="ghost-button">Cancel</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

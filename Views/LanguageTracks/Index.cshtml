@@ -1,0 +1,56 @@
+@model IEnumerable<LanguageTrackListItemViewModel>
+
+<section class="page-panel">
+    <p class="eyebrow">Language Tracks</p>
+    <h2>Build structured goals for every target language.</h2>
+    <p class="section-copy">@ViewData["SectionText"]</p>
+
+    <div class="toolbar">
+        <form asp-action="Index" method="get" class="search-form">
+            <input type="text" name="searchTerm" value="@ViewBag.SearchTerm" placeholder="Search by language, goal level, or focus area" />
+            <button type="submit" class="ghost-button">Filter</button>
+        </form>
+        <div class="button-row">
+            <a asp-action="MyTracks" class="ghost-button">My Focus Tracks</a>
+            <a asp-action="Create" class="primary-button">Create Track</a>
+        </div>
+    </div>
+</section>
+
+@if (Model.Any())
+{
+    <section class="card-grid two-up">
+        @foreach (var track in Model)
+        {
+            <article class="content-card">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">@track.CurrentLevel -> @track.GoalLevel</p>
+                        <h3>@track.Name</h3>
+                    </div>
+                    <span class="pill">@track.FocusArea</span>
+                </div>
+
+                <p class="meta-text">Weekly goal: @track.WeeklyStudyGoalHours hour(s) · Milestone: @track.MilestoneDate.ToString("dd MMM yyyy")</p>
+
+                <div class="mini-stats">
+                    <span>Lessons: @track.LessonCount</span>
+                    <span>Completed: @track.CompletedLessons</span>
+                    <span>Practice: @track.PracticeMinutes min</span>
+                </div>
+
+                <div class="button-row">
+                    <a asp-action="Details" asp-route-id="@track.Id" class="primary-button">Details</a>
+                    <a asp-action="Edit" asp-route-id="@track.Id" class="ghost-button">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@track.Id" class="ghost-button ghost-button--danger">Delete</a>
+                </div>
+            </article>
+        }
+    </section>
+}
+else
+{
+    <section class="content-card compact-card">
+        <p class="empty-copy">No language tracks yet. Create one to start organizing your learning plan.</p>
+    </section>
+}

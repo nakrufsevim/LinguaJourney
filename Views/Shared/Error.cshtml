@@ -1,0 +1,21 @@
+@model ErrorViewModel
+
+@{
+    ViewData["Title"] = "Error";
+}
+
+<section class="hero-card compact-card">
+    <p class="eyebrow">Something went wrong</p>
+    <h1>We could not complete that request.</h1>
+    <p>If the problem keeps happening, review the database connection and current route setup.</p>
+
+    @if (Model.ShowRequestId)
+    {
+        <p class="meta-text">Request ID: <code>@Model.RequestId</code></p>
+    }
+
+    <div class="button-row">
+        <a asp-controller="Home" asp-action="Index" class="primary-button">Back to Home</a>
+        <a asp-controller="Home" asp-action="Privacy" class="ghost-button">View Privacy Page</a>
+    </div>
+</section>

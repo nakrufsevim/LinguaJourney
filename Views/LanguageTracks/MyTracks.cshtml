@@ -1,0 +1,36 @@
+@model IEnumerable<LanguageTrackListItemViewModel>
+
+<section class="page-panel">
+    <p class="eyebrow">My Focus Tracks</p>
+    <h2>The tracks that need attention first.</h2>
+    <p class="section-copy">@ViewData["SectionText"]</p>
+</section>
+
+@if (Model.Any())
+{
+    <section class="card-grid two-up">
+        @foreach (var track in Model)
+        {
+            <article class="content-card">
+                <p class="eyebrow">@track.Name</p>
+                <h3>@track.FocusArea</h3>
+                <p class="meta-text">Goal level: @track.GoalLevel · Milestone: @track.MilestoneDate.ToString("dd MMM yyyy")</p>
+                <div class="mini-stats">
+                    <span>Lessons: @track.LessonCount</span>
+                    <span>Completed: @track.CompletedLessons</span>
+                    <span>Practice: @track.PracticeMinutes min</span>
+                </div>
+                <div class="button-row">
+                    <a asp-action="Details" asp-route-id="@track.Id" class="primary-button">Open Track</a>
+                    <a asp-controller="Lessons" asp-action="Create" asp-route-languageTrackId="@track.Id" class="ghost-button">Add Lesson</a>
+                </div>
+            </article>
+        }
+    </section>
+}
+else
+{
+    <section class="content-card compact-card">
+        <p class="empty-copy">Nothing to focus on yet. Add a track and set the first milestone.</p>
+    </section>
+}

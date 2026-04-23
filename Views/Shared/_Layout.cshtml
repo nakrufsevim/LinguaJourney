@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LinguaJourney</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="site-orb site-orb-one"></div>
+    <div class="site-orb site-orb-two"></div>
+
+    <header class="topbar-wrap">
+        <div class="shell topbar">
+            <a asp-controller="Home" asp-action="Index" class="brand-mark">
+                <span class="brand-mark__pulse"></span>
+                <span>LinguaJourney</span>
+            </a>
+
+            <nav class="top-links">
+                <a asp-controller="Home" asp-action="About">Method</a>
+                <a asp-controller="Home" asp-action="Search">Search</a>
+                <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-controller="LanguageTracks" asp-action="Index">Tracks</a>
+                    <a asp-controller="Lessons" asp-action="Index">Lessons</a>
+                }
+            </nav>
+
+            <div class="top-actions">
+                @await Html.PartialAsync("_LoginPartial")
+            </div>
+        </div>
+    </header>
+
+    <main class="shell site-main">
+        @if (TempData["StatusMessage"] is string statusMessage)
+        {
+            <div class="flash-message">@statusMessage</div>
+        }
+
+        @RenderBody()
+    </main>
+
+    <footer class="shell footer-bar">
+        <div>
+            <strong>LinguaJourney</strong>
+            <p>Foreign language learning with structured plans, guided lessons, and reflective practice.</p>
+        </div>
+        <div class="footer-bar__meta">
+            <span>@DateTime.Now.Year</span>
+            <span>Two layouts, full CRUD, EF Core code-first, authentication, view models, and validations included.</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

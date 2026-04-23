@@ -1,0 +1,22 @@
+@model LessonFormViewModel
+
+<section class="page-panel">
+    <p class="eyebrow">Edit</p>
+    <h2>Update this lesson plan</h2>
+</section>
+
+<section class="content-card">
+    <form asp-action="Edit" method="post" class="form-grid">
+        <input asp-for="Id" type="hidden" />
+        <partial name="_Form" model="Model" />
+
+        <div class="form-span-2 button-row">
+            <button type="submit" class="primary-button">Save Changes</button>
+            <a asp-action="Details" asp-route-id="@Model.Id" class="ghost-button">Back</a>
+        </div>
+    </form>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
