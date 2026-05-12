@@ -46,7 +46,6 @@ namespace LinguaJourney.ViewModels
     public class SearchResultViewModel
     {
         public string Query { get; set; } = string.Empty;
-        public bool IsAuthenticated { get; set; }
         public IEnumerable<SearchResultCardViewModel> Tracks { get; set; } = new List<SearchResultCardViewModel>();
         public IEnumerable<SearchResultCardViewModel> Lessons { get; set; } = new List<SearchResultCardViewModel>();
         public IEnumerable<SearchResultCardViewModel> PracticeLogs { get; set; } = new List<SearchResultCardViewModel>();

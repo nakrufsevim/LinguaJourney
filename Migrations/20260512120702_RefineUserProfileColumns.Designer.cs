@@ -4,6 +4,7 @@ using LinguaJourney.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LinguaJourney.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260512120702_RefineUserProfileColumns")]
+    partial class RefineUserProfileColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,10 +80,7 @@ namespace LinguaJourney.Migrations
 
                     b.HasIndex("UserId", "MilestoneDate");
 
-                    b.ToTable("LanguageTracks", t =>
-                        {
-                            t.HasCheckConstraint("CK_LanguageTracks_WeeklyStudyGoalHours", "[WeeklyStudyGoalHours] >= 1 AND [WeeklyStudyGoalHours] <= 40");
-                        });
+                    b.ToTable("LanguageTracks");
                 });
 
             modelBuilder.Entity("LinguaJourney.Models.Lesson", b =>
@@ -146,10 +146,7 @@ namespace LinguaJourney.Migrations
 
                     b.HasIndex("UserId", "IsCompleted", "ScheduledDate");
 
-                    b.ToTable("Lessons", t =>
-                        {
-                            t.HasCheckConstraint("CK_Lessons_EstimatedMinutes", "[EstimatedMinutes] >= 10 AND [EstimatedMinutes] <= 240");
-                        });
+                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("LinguaJourney.Models.PracticeLog", b =>
@@ -208,14 +205,7 @@ namespace LinguaJourney.Migrations
 
                     b.HasIndex("UserId", "NextReviewDate");
 
-                    b.ToTable("PracticeLogs", t =>
-                        {
-                            t.HasCheckConstraint("CK_PracticeLogs_AccuracyScore", "[AccuracyScore] >= 1 AND [AccuracyScore] <= 100");
-
-                            t.HasCheckConstraint("CK_PracticeLogs_DurationMinutes", "[DurationMinutes] >= 5 AND [DurationMinutes] <= 240");
-
-                            t.HasCheckConstraint("CK_PracticeLogs_ReviewOrder", "[NextReviewDate] >= [PracticedOn]");
-                        });
+                    b.ToTable("PracticeLogs");
                 });
 
             modelBuilder.Entity("LinguaJourney.Models.User", b =>

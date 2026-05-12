@@ -4,6 +4,7 @@ using LinguaJourney.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LinguaJourney.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260512115827_AddTimelineIndexes")]
+    partial class AddTimelineIndexes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,10 +80,7 @@ namespace LinguaJourney.Migrations
 
                     b.HasIndex("UserId", "MilestoneDate");
 
-                    b.ToTable("LanguageTracks", t =>
-                        {
-                            t.HasCheckConstraint("CK_LanguageTracks_WeeklyStudyGoalHours", "[WeeklyStudyGoalHours] >= 1 AND [WeeklyStudyGoalHours] <= 40");
-                        });
+                    b.ToTable("LanguageTracks");
                 });
 
             modelBuilder.Entity("LinguaJourney.Models.Lesson", b =>
@@ -146,10 +146,7 @@ namespace LinguaJourney.Migrations
 
                     b.HasIndex("UserId", "IsCompleted", "ScheduledDate");
 
-                    b.ToTable("Lessons", t =>
-                        {
-                            t.HasCheckConstraint("CK_Lessons_EstimatedMinutes", "[EstimatedMinutes] >= 10 AND [EstimatedMinutes] <= 240");
-                        });
+                    b.ToTable("Lessons");
                 });
 
             modelBuilder.Entity("LinguaJourney.Models.PracticeLog", b =>
@@ -208,14 +205,7 @@ namespace LinguaJourney.Migrations
 
                     b.HasIndex("UserId", "NextReviewDate");
 
-                    b.ToTable("PracticeLogs", t =>
-                        {
-                            t.HasCheckConstraint("CK_PracticeLogs_AccuracyScore", "[AccuracyScore] >= 1 AND [AccuracyScore] <= 100");
-
-                            t.HasCheckConstraint("CK_PracticeLogs_DurationMinutes", "[DurationMinutes] >= 5 AND [DurationMinutes] <= 240");
-
-                            t.HasCheckConstraint("CK_PracticeLogs_ReviewOrder", "[NextReviewDate] >= [PracticedOn]");
-                        });
+                    b.ToTable("PracticeLogs");
                 });
 
             modelBuilder.Entity("LinguaJourney.Models.User", b =>
@@ -239,21 +229,18 @@ namespace LinguaJourney.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("JoinDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LearningMotto")
                         .IsRequired()
-                        .HasMaxLength(160)
-                        .HasColumnType("nvarchar(160)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -263,8 +250,7 @@ namespace LinguaJourney.Migrations
 
                     b.Property<string>("NativeLanguage")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("nvarchar(60)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -285,8 +271,7 @@ namespace LinguaJourney.Migrations
 
                     b.Property<string>("ProfilePicture")
                         .IsRequired()
-                        .HasMaxLength(260)
-                        .HasColumnType("nvarchar(260)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

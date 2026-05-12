@@ -2,6 +2,7 @@ using System.Diagnostics;
 using LinguaJourney.Data;
 using LinguaJourney.Models;
 using LinguaJourney.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -111,6 +112,7 @@ namespace LinguaJourney.Controllers
             return View();
         }
 
+        [Authorize]
         public async Task<IActionResult> Search(string? query)
         {
             ViewData["Title"] = "Search";
@@ -118,15 +120,12 @@ namespace LinguaJourney.Controllers
 
             var model = new SearchResultViewModel
             {
-                Query = query?.Trim() ?? string.Empty,
-                IsAuthenticated = User.Identity?.IsAuthenticated == true
+                Query = query?.Trim() ?? string.Empty
             };
 
-            if (!model.IsAuthenticated || string.IsNullOrWhiteSpace(model.Query))
+            if (string.IsNullOrWhiteSpace(model.Query))
             {
-                ViewBag.SearchMessage = model.IsAuthenticated
-                    ? "Start with a word, theme, language, or skill."
-                    : "Login to search your study library.";
+                ViewBag.SearchMessage = "Start with a word, theme, language, or skill.";
                 return View(model);
             }
 
