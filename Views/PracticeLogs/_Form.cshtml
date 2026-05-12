@@ -1,5 +1,12 @@
 @model PracticeLogFormViewModel
 
+@{
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
+    var nextReviewMin = Model.Id == 0
+        ? today
+        : Model.PracticedOn.ToString("yyyy-MM-dd");
+}
+
 <div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
 
 <div class="field">
@@ -44,13 +51,13 @@
 
 <div class="field">
     <label asp-for="PracticedOn"></label>
-    <input asp-for="PracticedOn" />
+    <input asp-for="PracticedOn" max="@today" data-today="@today" />
     <span asp-validation-for="PracticedOn" class="field-error"></span>
 </div>
 
 <div class="field">
     <label asp-for="NextReviewDate"></label>
-    <input asp-for="NextReviewDate" />
+    <input asp-for="NextReviewDate" min="@nextReviewMin" data-today="@today" data-create-mode="@((Model.Id == 0).ToString().ToLowerInvariant())" />
     <span asp-validation-for="NextReviewDate" class="field-error"></span>
 </div>
 

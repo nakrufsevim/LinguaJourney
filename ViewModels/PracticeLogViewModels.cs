@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LinguaJourney.ViewModels
 {
-    public class PracticeLogFormViewModel
+    public class PracticeLogFormViewModel : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -44,6 +44,28 @@ namespace LinguaJourney.ViewModels
         [DataType(DataType.Date)]
         [Display(Name = "Next Review Date")]
         public DateTime NextReviewDate { get; set; } = DateTime.Today.AddDays(7);
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (PracticedOn.Date > DateTime.Today)
+            {
+                yield return new ValidationResult(
+                    "Practice date cannot be in the future.",
+                    new[] { nameof(PracticedOn) });
+            }
+
+            var minimumNextReviewDate = Id == 0 ? DateTime.Today : PracticedOn.Date;
+            var nextReviewMessage = Id == 0
+                ? "Next review date cannot be in the past."
+                : "Next review date cannot be earlier than the practice date.";
+
+            if (NextReviewDate.Date < minimumNextReviewDate)
+            {
+                yield return new ValidationResult(
+                    nextReviewMessage,
+                    new[] { nameof(NextReviewDate) });
+            }
+        }
     }
 
     public class PracticeLogListItemViewModel

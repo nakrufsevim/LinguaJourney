@@ -1,5 +1,9 @@
 @model LanguageTrackFormViewModel
 
+@{
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
+}
+
 <div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
 
 <div class="field">
@@ -40,7 +44,7 @@
 
 <div class="field">
     <label asp-for="MilestoneDate"></label>
-    <input asp-for="MilestoneDate" />
+    <input asp-for="MilestoneDate" min="@today" />
     <span asp-validation-for="MilestoneDate" class="field-error"></span>
 </div>
 

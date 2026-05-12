@@ -1,5 +1,9 @@
 @model LessonFormViewModel
 
+@{
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
+}
+
 <div asp-validation-summary="ModelOnly" class="validation-summary form-span-2"></div>
 
 <div class="field">
@@ -46,7 +50,7 @@
 
 <div class="field">
     <label asp-for="ScheduledDate"></label>
-    <input asp-for="ScheduledDate" />
+    <input asp-for="ScheduledDate" min="@today" data-default-min="@today" />
     <span asp-validation-for="ScheduledDate" class="field-error"></span>
 </div>
 

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LinguaJourney.ViewModels
 {
-    public class LanguageTrackFormViewModel
+    public class LanguageTrackFormViewModel : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -42,6 +42,16 @@ namespace LinguaJourney.ViewModels
         [DataType(DataType.Date)]
         [Display(Name = "Milestone Date")]
         public DateTime MilestoneDate { get; set; } = DateTime.Today.AddMonths(3);
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (MilestoneDate.Date < DateTime.Today)
+            {
+                yield return new ValidationResult(
+                    "Milestone date cannot be in the past.",
+                    new[] { nameof(MilestoneDate) });
+            }
+        }
     }
 
     public class LanguageTrackListItemViewModel

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LinguaJourney.ViewModels
 {
-    public class LessonFormViewModel
+    public class LessonFormViewModel : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -48,6 +48,16 @@ namespace LinguaJourney.ViewModels
 
         [Display(Name = "Completed")]
         public bool IsCompleted { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!IsCompleted && ScheduledDate.Date < DateTime.Today)
+            {
+                yield return new ValidationResult(
+                    "Scheduled date cannot be in the past unless the lesson is marked as completed.",
+                    new[] { nameof(ScheduledDate), nameof(IsCompleted) });
+            }
+        }
     }
 
     public class LessonListItemViewModel
